@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Canvas Demo</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+
+  <body>
+    <div id="container">
+      <canvas
+        id="canvas-real"
+        class="canvas"
+        height="800px"
+        width="1500px"
+        title="canvas"
+      ></canvas>
+      <canvas
+        id="canvas-draft"
+        class="canvas"
+        height="800px"
+        width="1500px"
+      ></canvas>
+      <button id="line">Line drawing</button>
+      <button id="rect">Rect drawing</button>
+
+      <button id="green">Green</button>
+    </div>
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.2.1.js"
+    ></script>
+    <!-- Hard-coded canvas and functions -->
+    <script
+      type="text/javascript"
+      src="./assets/javascript/hardcoded.js"
+    ></script>
+
+    <!-- User event canvas - class based -->
+    <script
+      type="text/javascript"
+      src="./assets/javascript/canvas-common.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="./assets/javascript/classes.js"
+    ></script>
+    <script type="text/javascript">
+      // Init script, what needs to happen as the page loads, we want to give our users the ability to use a drawing strategy
+      $(() => {
+        currentFunction = new DrawingRectangle(contextReal, contextDraft);
+
+        $("#line").on("click", () => {
+          currentFunction = new DrawingStraight(contextReal, contextDraft);
+        });
+        $("#rect").on("click", () => {
+          currentFunction = new DrawingRectangle(contextReal, contextDraft);
+        });
+
+        $("#green").on("click", () => {
+          console.log("green");
+          contextReal.strokeStyle = "green";
+          contextDraft.strokeStyle = "green";
+        });
+      });
+    </script>
+  </body>
+</html>
